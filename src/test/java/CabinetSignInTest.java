@@ -11,13 +11,11 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import pages.Header;
 import pages.Registration;
 
+import static pages.BurgerAssembling.BURGER_ASSEMBLING_PAGE;
 
-public class Cabinet {
+
+public class CabinetSignInTest {
     private WebDriver driver;
-    private String accessToken;
-    private String name;
-    private String email;
-    private String password;
     private UserClient user;
     private UserCreateRandomApi userCreateRandomApi;
     private String auth;
@@ -25,10 +23,10 @@ public class Cabinet {
     @Before
     public void setUp() {
         driver = new ChromeDriver();
-        driver.manage().window().maximize(); //вызов метода для открытия окна браузера во весь экран
-        driver.get("https://stellarburgers.nomoreparties.site/"); //открываем сайт
+        driver.manage().window().maximize();
+        driver.get(BURGER_ASSEMBLING_PAGE);
         user = new UserClient();
-        userCreateRandomApi = UserCreateRandomApi.getRandomUser();
+        userCreateRandomApi = UserCreateRandomApi.getRandomUser(); // Создание рандомного пользователя через API
         ValidatableResponse response = user.createUser(userCreateRandomApi);
         auth = response.extract().path("accessToken");
 
@@ -36,7 +34,7 @@ public class Cabinet {
 
     @Test
     @DisplayName("Sign in for Enter button on main page")
-    public void enterOnMainPage() {
+    public void enterOnMainPageTest() {
         Registration registration = new Registration(driver);
         registration.loginButtonOnMainPageClick();
         registration.inputEmail(userCreateRandomApi.getEmail());
@@ -48,7 +46,7 @@ public class Cabinet {
 
     @Test
     @DisplayName("Sign in for private cabinet button")
-    public void enterOnPrivateCabinet() {
+    public void enterOnPrivateCabinetTest() {
         Registration registration = new Registration(driver);
         registration.userAccountButtonClick();
         registration.inputEmail(userCreateRandomApi.getEmail());
@@ -60,7 +58,7 @@ public class Cabinet {
 
     @Test
     @DisplayName("SignIn for registration page")
-    public void enterOnRegistrationPage() {
+    public void enterOnRegistrationPageTest() {
         Registration registration = new Registration(driver);
         registration.userAccountButtonClick();
         registration.clickSighInRegistrationButton(driver);
@@ -75,7 +73,7 @@ public class Cabinet {
 
     @Test
     @DisplayName("SignIn for forgot password page")
-    public void enterOnRemakePasswordPage() {
+    public void enterOnRestorePasswordPageTest() {
         Registration registration = new Registration(driver);
         registration.userAccountButtonClick();
         registration.forgotPasswordButtonClick();
@@ -96,7 +94,7 @@ public class Cabinet {
     }
 
     @Test
-    public void goToConstructor() {
+    public void goToConstructorTest() {
         Registration registration = new Registration(driver);
         registration.userAccountButtonClick();
         registration.forgotPasswordButtonClick();
@@ -111,7 +109,7 @@ public class Cabinet {
     @After
     public void deleteUser() {
         if (auth != null) {
-            user.deleteUser(auth);
+            user.deleteUser(auth); // Удалние пользователя
         }
         driver.quit();
 

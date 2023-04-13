@@ -2,47 +2,47 @@ package model;
 
 import org.apache.commons.lang3.RandomStringUtils;
 
-public class UserRandomApi {
+public class UserCreateRandomApi {
 
     private String email;
     private String password;
     private String name;
 
-    public UserRandomApi(String email, String password, String name){
+    public UserCreateRandomApi(String email, String password, String name) {
         this.email = email;
         this.password = password;
         this.name = name;
     }
 
-    public UserRandomApi() {
+    public UserCreateRandomApi() {
 
     }
 
-    public static UserRandomApi getRandomUser() {
+    public static UserCreateRandomApi getRandomUser() {
         final String userEmail = RandomStringUtils.randomAlphabetic(8) + "@yandex.ru";
         final String userPassword = RandomStringUtils.randomAlphabetic(8);
         final String userName = RandomStringUtils.randomAlphabetic(8);
-        return new UserRandomApi(userEmail, userPassword, userName);
+        return new UserCreateRandomApi(userEmail, userPassword, userName);
     }
 
     public String getEmail() {
         return email;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
     public void setEmail(String email) {
         this.email = email;
     }
 
+    public String getName() {
+        return name;
+    }
+
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getPassword() {
+        return password;
     }
 
     public void setPassword(String password) {

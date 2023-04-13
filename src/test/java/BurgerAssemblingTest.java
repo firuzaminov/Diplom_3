@@ -17,8 +17,8 @@ public class BurgerAssemblingTest {
     @Before
     public void setUp() {
         driver = new ChromeDriver();
-        driver.manage().window().maximize(); //вызов метода для открытия окна браузера во весь экран
-        driver.get(BURGER_ASSEMBLING_PAGE); //открываем сайт
+        driver.manage().window().maximize();
+        driver.get(BURGER_ASSEMBLING_PAGE);
     }
 
     @Test
