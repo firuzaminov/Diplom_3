@@ -1,0 +1,69 @@
+import client.UserClient;
+import io.qameta.allure.junit4.DisplayName;
+import io.restassured.RestAssured;
+import model.UserCreateRandom;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import pages.Registration;
+
+import static org.junit.Assert.assertTrue;
+import static pages.Registration.REGISTER_PAGE_PATH;
+
+
+public class RegistrationTest {
+    private final String URL_API = "https://stellarburgers.nomoreparties.site";
+    private final UserClient userClient = new UserClient();
+    private WebDriver driver;
+    private String name;
+    private String email;
+    private String password;
+    private String shortPassword;
+
+    @Before
+    public void setUp() {
+        driver = new ChromeDriver();
+        driver.manage().window().maximize();
+        driver.get(REGISTER_PAGE_PATH);
+        UserCreateRandom userCreateRandom = new UserCreateRandom(); // Создание рандомного пользоваателя
+        name = userCreateRandom.getRandomName();
+        email = userCreateRandom.getRandomEmail();
+        password = userCreateRandom.getRandomPassword();
+        shortPassword = userCreateRandom.getRandomShortPassword();
+
+    }
+
+    @Test
+    @DisplayName("Success registration test")
+    public void successRegistrationTest() {
+        Registration registration = new Registration(driver);
+        registration.inputName(name);
+        registration.inputEmail(email);
+        registration.inputPassword(password);
+        registration.clickRegisterButton();
+        assertTrue(registration.loginButtonIsDisplayedCheck());
+    }
+
+    @Test
+    @DisplayName("Validation for short password test")
+    public void validationForShortPassword() {
+        Registration registration = new Registration(driver);
+        registration.inputName(name);
+        registration.inputEmail(email);
+        registration.inputPassword(shortPassword);
+        registration.clickRegisterButton();
+        assertTrue(registration.showError());
+    }
+
+
+    @After
+    public void deleteUser() {
+        RestAssured.baseURI = URL_API;
+        userClient.deleteUserForRegistrationTest(email, password); //Создал еще один метод для удаления юзера в обоих кейсах
+        userClient.deleteUserForRegistrationTest(email, shortPassword);
+        driver.quit();
+
+    }
+}
