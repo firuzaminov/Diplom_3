@@ -27,7 +27,7 @@ public class BurgerAssemblingTest {
         BurgerAssembling burgerAssembling = new BurgerAssembling(driver);
         burgerAssembling.saucesSectionClick();
         burgerAssembling.bunsSectionClick();
-        assertEquals(burgerAssembling.currentActiveText(), "Булки");
+        assertEquals("Булки", burgerAssembling.currentActiveText());
     }
 
     @Test
@@ -35,7 +35,7 @@ public class BurgerAssemblingTest {
     public void transitionSaucesConstructorSectionTest() {
         BurgerAssembling burgerAssembling = new BurgerAssembling(driver);
         burgerAssembling.saucesSectionClick();
-        assertEquals(burgerAssembling.currentActiveText(), "Соусы");
+        assertEquals("Соусы", burgerAssembling.currentActiveText());
     }
 
     @Test
@@ -43,7 +43,7 @@ public class BurgerAssemblingTest {
     public void transitionFillingsConstructorSectionTest() {
         BurgerAssembling burgerAssembling = new BurgerAssembling(driver);
         burgerAssembling.fillingsSectionClick();
-        assertEquals(burgerAssembling.currentActiveText(), "Начинки");
+        assertEquals("Начинки", burgerAssembling.currentActiveText());
     }
 
     @After

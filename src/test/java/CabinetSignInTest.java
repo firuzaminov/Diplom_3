@@ -19,6 +19,8 @@ public class CabinetSignInTest {
     private UserClient user;
     private UserCreateRandomApi userCreateRandomApi;
     private String auth;
+    private String email;
+    private String password;
 
     @Before
     public void setUp() {
@@ -27,6 +29,8 @@ public class CabinetSignInTest {
         driver.get(BURGER_ASSEMBLING_PAGE);
         user = new UserClient();
         userCreateRandomApi = UserCreateRandomApi.getRandomUser(); // Создание рандомного пользователя через API
+        email = userCreateRandomApi.getEmail();
+        password = userCreateRandomApi.getPassword();
         ValidatableResponse response = user.createUser(userCreateRandomApi);
         auth = response.extract().path("accessToken");
 
@@ -37,8 +41,8 @@ public class CabinetSignInTest {
     public void enterOnMainPageTest() {
         Registration registration = new Registration(driver);
         registration.loginButtonOnMainPageClick();
-        registration.inputEmail(userCreateRandomApi.getEmail());
-        registration.inputPassword(userCreateRandomApi.getPassword());
+        registration.inputEmail(email);
+        registration.inputPassword(password);
         registration.loginButtonOnEnterPageClick();
         registration.userAccountButtonClick();
         Assert.assertTrue(registration.isLogoutButtonVisible(driver));
@@ -49,8 +53,8 @@ public class CabinetSignInTest {
     public void enterOnPrivateCabinetTest() {
         Registration registration = new Registration(driver);
         registration.userAccountButtonClick();
-        registration.inputEmail(userCreateRandomApi.getEmail());
-        registration.inputPassword(userCreateRandomApi.getPassword());
+        registration.inputEmail(email);
+        registration.inputPassword(password);
         registration.loginButtonOnEnterPageClick();
         registration.userAccountButtonClick();
         Assert.assertTrue(registration.isLogoutButtonVisible(driver));
@@ -63,8 +67,8 @@ public class CabinetSignInTest {
         registration.userAccountButtonClick();
         registration.clickSighInRegistrationButton(driver);
         registration.clickSignInButton(driver);
-        registration.inputEmail(userCreateRandomApi.getEmail());
-        registration.inputPassword(userCreateRandomApi.getPassword());
+        registration.inputEmail(email);
+        registration.inputPassword(password);
         registration.loginButtonOnEnterPageClick();
         registration.userAccountButtonClick();
         Assert.assertTrue(registration.isLogoutButtonVisible(driver));
@@ -78,8 +82,8 @@ public class CabinetSignInTest {
         registration.userAccountButtonClick();
         registration.forgotPasswordButtonClick();
         registration.clickSignInButton(driver);
-        registration.inputEmail(userCreateRandomApi.getEmail());
-        registration.inputPassword(userCreateRandomApi.getPassword());
+        registration.inputEmail(email);
+        registration.inputPassword(password);
         registration.loginButtonOnEnterPageClick();
         registration.userAccountButtonClick();
         Assert.assertTrue(registration.isLogoutButtonVisible(driver));
@@ -99,8 +103,8 @@ public class CabinetSignInTest {
         registration.userAccountButtonClick();
         registration.forgotPasswordButtonClick();
         registration.clickSignInButton(driver);
-        registration.inputEmail(userCreateRandomApi.getEmail());
-        registration.inputPassword(userCreateRandomApi.getPassword());
+        registration.inputEmail(email);
+        registration.inputPassword(password);
         registration.loginButtonOnEnterPageClick();
         Header header = new Header(driver);
         header.checkConstructorMenuIsVisible();

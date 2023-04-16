@@ -1,5 +1,6 @@
 import client.UserClient;
 import io.qameta.allure.junit4.DisplayName;
+import io.restassured.RestAssured;
 import model.UserCreateRandom;
 import org.junit.After;
 import org.junit.Before;
@@ -13,13 +14,13 @@ import static pages.Registration.REGISTER_PAGE_PATH;
 
 
 public class RegistrationTest {
+    private final String URL_API = "https://stellarburgers.nomoreparties.site";
+    private final UserClient userClient = new UserClient();
     private WebDriver driver;
     private String name;
     private String email;
     private String password;
     private String shortPassword;
-    private String auth;
-    private UserClient user;
 
     @Before
     public void setUp() {
@@ -59,9 +60,9 @@ public class RegistrationTest {
 
     @After
     public void deleteUser() {
-        if (auth != null) {
-            user.deleteUser(auth); // Удаление пользователя
-        }
+        RestAssured.baseURI = URL_API;
+        userClient.deleteUserForRegistrationTest(email, password); //Создал еще один метод для удаления юзера в обоих кейсах
+        userClient.deleteUserForRegistrationTest(email, shortPassword);
         driver.quit();
 
     }

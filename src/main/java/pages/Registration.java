@@ -7,22 +7,22 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class Registration {
-    public static final String REGISTER_PAGE_PATH = "https://stellarburgers.nomoreparties.site/register";
     private final WebDriver driver;
-    private final By NAME = By.xpath(".//label[text()='Имя']/following-sibling::input");
-    private final By EMAIL = By.xpath(".//label[text()='Email']/following-sibling::input");
-    private final By PASSWORD = By.xpath(".//label[text()='Пароль']/following-sibling::input");
-    private final By ERROR_MESSAGE = By.xpath(".//p[@class='input__error text_type_main-default']");
-    private final By REGISTRATION_BUTTON_ON_SIGN_IN_PAGE = By.className("button_button__33qZ0");
-    private final By SING_IN = By.xpath(".//div[@class='Auth_login__3hAey']//a[@class='Auth_link__1fOlj']");
+    public static final String REGISTER_PAGE_PATH = "https://stellarburgers.nomoreparties.site/register";
+    private static final By NAME = By.xpath(".//label[text()='Имя']/following-sibling::input");
+    private static final By EMAIL = By.xpath(".//label[text()='Email']/following-sibling::input");
+    private static final By PASSWORD = By.xpath(".//label[text()='Пароль']/following-sibling::input");
+    private static final By ERROR_MESSAGE = By.xpath(".//p[@class='input__error text_type_main-default']");
+    private static final By REGISTRATION_BUTTON_ON_SIGN_IN_PAGE = By.className("button_button__33qZ0");
+    private static final By SING_IN = By.xpath(".//div[@class='Auth_login__3hAey']//a[@class='Auth_link__1fOlj']");
     private static final By LOGOUT_BUTTON = By.xpath("(//button[@type='button'])[1]");
     private static final By USER_CABINET_BUTTON = By.xpath("//p[text()='Личный Кабинет']");
     private static final By LOGIN_BUTTON_SIGN_IN_ACCOUNT = By.xpath("//button[text()='Войти в аккаунт']");
     private static final By LOGIN_BUTTON_SIGN_IN = By.xpath("//button[text()='Войти']");
-    private By MAKE_ORDER_BUTTON = By.xpath(".//button[text()='Оформить заказ']");
-    private By SIGN_IN_BUTTON = By.xpath(".//a[text()='Войти']");
-    private By FORGOT_PASSWORD_BUTTON = By.xpath(".//a[text()='Восстановить пароль']");
-    private By SIGN_IN_FROM_REGISTRATION_PAGE_BUTTON = By.className("Auth_link__1fOlj");
+    private static final By MAKE_ORDER_BUTTON = By.xpath(".//button[text()='Оформить заказ']");
+    private static final By SIGN_IN_BUTTON = By.xpath(".//a[text()='Войти']");
+    private static final By FORGOT_PASSWORD_BUTTON = By.xpath(".//a[text()='Восстановить пароль']");
+    private static final By SIGN_IN_FROM_REGISTRATION_PAGE_BUTTON = By.className("Auth_link__1fOlj");
 
     public Registration(WebDriver driver) {
         this.driver = driver;
